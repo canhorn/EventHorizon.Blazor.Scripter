@@ -1,0 +1,32 @@
+﻿
+<div>
+    <button @onclick="HandlePromptUser">Prompt User</button>
+
+<pre>
+&lt;button @("@")onclick="HandlePromptUser"&gt;Prompt User&lt;/button&gt;
+public async Task HandlePromptUser()
+{
+    // Close the window with JavaScript.
+    await JSRunner.Run(
+        "closeWindow",
+        "var name = prompt('What is your name?'); if(name) alert(name);",
+        new { }
+    );
+}
+</pre>
+</div>
+
+@code {
+    [Inject]
+    public JavaScriptRunner JSRunner { get; set; }
+
+    public async Task HandlePromptUser()
+    {
+        // Close the window with JavaScript.
+        await JSRunner.Run(
+            "closeWindow",
+            "var name = prompt('What is your name?'); if(name) alert(name);",
+            new { }
+        );
+    }
+}

@@ -1,0 +1,40 @@
+﻿
+<div>
+    <button @onclick="HandleAlertUser">Show Alert</button>
+
+<pre>
+&lt;button @("@")onclick="HandleAlertUser"&gt;Show Alert&lt;/button&gt;
+public async Task HandlePromptUser()
+{
+    // Say Hello to the UserName
+    await JSRunner.Run(
+        "alertUser",
+        // To note that passed props will be converted to camel-case
+        "alert('Hello, ' + $args.userName)",
+        new
+        {
+            UserName = "Awesome",
+        }
+    );
+}
+</pre>
+</div>
+
+@code {
+    [Inject]
+    public JavaScriptRunner JSRunner { get; set; }
+
+    public async Task HandleAlertUser()
+    {
+        // Say Hello to the UserName
+        await JSRunner.Run(
+            "alertUser",
+            // To note that passed props will be converted to camel-case
+            "alert('Hello, ' + $args.userName)",
+            new
+            {
+                UserName = "Awesome",
+            }
+        );
+    }
+}
